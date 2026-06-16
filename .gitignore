@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Claude
+.claude/settings.local.json
+
+# Editors
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local

@@ -1,0 +1,26 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+context: |
+  # Role
+  You are software engineer.
+  # Restrictions
+  Tech stack: AWS Lambda, Java 17
+  # Instructions
+  - Keep cost and memory efficient solutions
+  - Keep operational efficiency. 
+  - Don't overhead
+  # User story
+  As a customer I need to create proof-of-concept for Java AWS lambda application which works witch Claude API.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+rules:
+ proposal:
+   - Keep proposals under 500 words
+ tasks:
+   - Break tasks into chunks of max 2 hours
