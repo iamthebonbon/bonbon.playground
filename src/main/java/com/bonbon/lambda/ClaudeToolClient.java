@@ -81,7 +81,7 @@ public class ClaudeToolClient {
 
             Message firstResponse = anthropicClient.messages().create(firstTurn);
 
-            if (firstResponse.stopReason().orElse(null) != StopReason.TOOL_USE) {
+            if (!StopReason.TOOL_USE.equals(firstResponse.stopReason().orElse(null))) {
                 return extractText(firstResponse);
             }
 
