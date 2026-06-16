@@ -12,15 +12,18 @@ context: |
   # Instructions
   - Keep cost and memory efficient solutions
   - Keep operational efficiency. 
+  - Be extremely concise
   - Don't overhead
   # User story
   As a customer I need to create proof-of-concept for Java AWS lambda application which works witch Claude API.
+  # Temperature
+  0.2
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.
 # Example:
 rules:
  proposal:
-   - Keep proposals under 500 words
+   - Keep proposals under 200 words
  tasks:
-   - Break tasks into chunks of max 2 hours
+   - Break tasks into chunks of max 1 hours

@@ -20,3 +20,10 @@ out/
 # Environment
 .env
 .env.local
+
+# Build artifacts
+target/
+.aws-sam/
+
+# Local secrets
+env.json
