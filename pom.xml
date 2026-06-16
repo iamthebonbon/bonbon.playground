@@ -62,6 +62,14 @@
             <artifactId>ssm</artifactId>
         </dependency>
 
+        <!-- Silence SLF4J "no binding" warnings (Anthropic SDK pulls in SLF4J 1.x) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.36</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
