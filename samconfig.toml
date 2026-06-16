@@ -7,6 +7,7 @@ s3_prefix = "sam-app"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM CAPABILITY_AUTO_EXPAND"
 image_repositories = []
+disable_rollback = true
 
 [default.global.parameters]
 region = "eu-north-1"
