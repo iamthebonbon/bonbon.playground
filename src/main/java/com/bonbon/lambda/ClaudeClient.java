@@ -29,10 +29,6 @@ public class ClaudeClient {
     }
 
     private static String loadApiKey() {
-        String sysProp = System.getProperty("anthropic.api.key");
-        if (sysProp != null && !sysProp.isBlank()) {
-            return sysProp;
-        }
         String envVar = System.getenv("ANTHROPIC_API_KEY");
         if (envVar != null && !envVar.isBlank()) {
             return envVar;
