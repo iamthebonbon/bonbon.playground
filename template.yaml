@@ -9,21 +9,6 @@ Globals:
     Timeout: 30
 
 Resources:
-  ServerlessHttpApi:
-    Type: AWS::Serverless::HttpApi
-    Properties:
-      Auth:
-        Authorizers:
-          LambdaAuthorizer:
-            AuthorizerPayloadFormatVersion: "2.0"
-            EnableSimpleResponses: true
-            FunctionArn: !GetAtt AuthorizerFunction.Arn
-            Identity:
-              Headers:
-                - x-api-key
-            AuthorizerResultTtlInSeconds: 300
-        DefaultAuthorizer: LambdaAuthorizer
-
   AuthorizerFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -47,7 +32,6 @@ Resources:
           Properties:
             Path: /
             Method: post
-            ApiId: !Ref ServerlessHttpApi
       Policies:
         - Statement:
             - Effect: Allow
