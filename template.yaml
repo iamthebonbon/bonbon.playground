@@ -39,7 +39,35 @@ Resources:
                 - ssm:GetParameter
               Resource: !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/bonbon/anthropic-api-key'
 
+  ToolInvokeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.bonbon.lambda.ToolHandler::handleRequest
+      CodeUri: .
+      Environment:
+        Variables:
+          ORDERS_TABLE: orders
+      Events:
+        ToolApi:
+          Type: HttpApi
+          Properties:
+            Path: /tools
+            Method: post
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - ssm:GetParameter
+              Resource: !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/bonbon/anthropic-api-key'
+            - Effect: Allow
+              Action:
+                - dynamodb:GetItem
+              Resource: !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/orders'
+
 Outputs:
   ApiUrl:
     Description: API Gateway endpoint URL
     Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/'
+  ToolApiUrl:
+    Description: Tool-use API endpoint URL
+    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/tools'
