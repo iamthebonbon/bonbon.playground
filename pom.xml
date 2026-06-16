@@ -62,6 +62,12 @@
             <artifactId>ssm</artifactId>
         </dependency>
 
+        <!-- AWS SDK v2 DynamoDB -->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>dynamodb</artifactId>
+        </dependency>
+
         <!-- Silence SLF4J "no binding" warnings (Anthropic SDK pulls in SLF4J 1.x) -->
         <dependency>
             <groupId>org.slf4j</groupId>
