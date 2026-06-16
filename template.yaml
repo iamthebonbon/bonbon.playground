@@ -2,11 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: PoC - Invoke Claude API from a Java 17 Lambda
 
-Parameters:
-  CognitoUserPoolClientId:
-    Type: String
-    Description: Cognito User Pool App Client ID
-
 Globals:
   Function:
     Runtime: java17
@@ -19,13 +14,27 @@ Resources:
     Properties:
       Auth:
         Authorizers:
-          CognitoAuthorizer:
-            IdentitySource: "$request.header.Authorization"
-            JwtConfiguration:
-              audience:
-                - !Ref CognitoUserPoolClientId
-              issuer: "https://cognito-idp.eu-north-1.amazonaws.com/eu-north-1_q06stUEiB"
-        DefaultAuthorizer: CognitoAuthorizer
+          LambdaAuthorizer:
+            AuthorizerPayloadFormatVersion: "2.0"
+            EnableSimpleResponses: true
+            FunctionArn: !GetAtt AuthorizerFunction.Arn
+            Identity:
+              Headers:
+                - x-api-key
+            AuthorizerResultTtlInSeconds: 300
+        DefaultAuthorizer: LambdaAuthorizer
+
+  AuthorizerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.bonbon.lambda.Authorizer::handleRequest
+      CodeUri: .
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - ssm:GetParameter
+              Resource: !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/bonbon/api-key'
 
   ClaudeInvokeFunction:
     Type: AWS::Serverless::Function
