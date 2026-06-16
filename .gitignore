@@ -24,6 +24,3 @@ out/
 # Build artifacts
 target/
 .aws-sam/
-
-# Local secrets
-env.json

@@ -1,5 +1,13 @@
 {
   "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "Bash(openspec new *)",
+      "Bash(openspec status *)",
+      "Bash(openspec instructions *)",
+      "Bash(openspec list *)",
+      "Bash(mvn test *)"
+    ],
     "deny": [
       "Bash(rm -rf *)"
     ]
